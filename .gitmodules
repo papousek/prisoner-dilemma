@@ -1,0 +1,3 @@
+[submodule "libs/esymotools"]
+	path = libs/esymotools
+	url = git@github.com:papousek/eskymotools.git

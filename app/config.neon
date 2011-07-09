@@ -11,8 +11,13 @@ common:
 		# zlib.output_compression: yes
 		# default_charset: "UTF-8"
 
+	database:
+		database: "prisoner"
+		host: "localhost"
+		username: "root"
+
 	services:
-		authenticator: 
+		users:
 			class: UsersModel
 			
 		robotLoader:

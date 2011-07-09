@@ -1,23 +1,9 @@
 <?php
-
-/**
- * My Application
- *
- * @copyright  Copyright (c) 2010 John Doe
- * @package    MyApplication
- */
+namespace prisoner;
 
 use Nette\Diagnostics\Debugger,
 	Nette\Application as NA;
 
-
-
-/**
- * Error presenter.
- *
- * @author     John Doe
- * @package    MyApplication
- */
 class ErrorPresenter extends BasePresenter
 {
 

@@ -1,3 +1,6 @@
 [submodule "libs/esymotools"]
 	path = libs/esymotools
 	url = git@github.com:papousek/eskymotools.git
+[submodule "libs/dibi"]
+	path = libs/dibi
+	url = https://github.com/dg/dibi.git

@@ -36,11 +36,35 @@ $application->errorPresenter = 'Error';
 $application->onStartup[] = function() use ($application) {
 	$router = $application->getRouter();
 
-	$router[] = new Route('index.php', 'Homepage:default', Route::ONE_WAY);
+	$router[] = new Route('index.php', 'Default:default', Route::ONE_WAY);
 
-	$router[] = new Route('<presenter>/<action>[/<id>]', 'Homepage:default');
+	$router[] = new Route('<presenter>/<action>[/<id>]', 'Default:default');
 };
 
-
+// services
+$configurator->getContainer()->addService(
+	'database',
+	function($cont) {
+		return dibi::connect($cont->params["database"]);
+	}
+);
+$configurator->getContainer()->addservice(
+	'users',
+	function($cont) {
+		return new prisoner\UserRepository($cont->getService('database'));
+	}
+);
+$configurator->getContainer()->addservice(
+	'tournaments',
+	function($cont) {
+		return new prisoner\TournamentRepository($cont->getService('database'));
+	}
+);
+$configurator->getContainer()->addservice(
+	'strategies',
+	function($cont) {
+		return new prisoner\StrategyRepository($cont->getService('database'));
+	}
+);
 // Run the application!
 $application->run();

@@ -48,23 +48,5 @@ $configurator->getContainer()->addService(
 		return dibi::connect($cont->params["database"]);
 	}
 );
-$configurator->getContainer()->addservice(
-	'users',
-	function($cont) {
-		return new prisoner\UserRepository($cont->getService('database'));
-	}
-);
-$configurator->getContainer()->addservice(
-	'tournaments',
-	function($cont) {
-		return new prisoner\TournamentRepository($cont->getService('database'));
-	}
-);
-$configurator->getContainer()->addservice(
-	'strategies',
-	function($cont) {
-		return new prisoner\StrategyRepository($cont->getService('database'));
-	}
-);
 // Run the application!
 $application->run();

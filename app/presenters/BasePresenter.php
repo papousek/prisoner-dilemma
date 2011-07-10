@@ -1,3 +1,3 @@
 <?php
 
-abstract class BasePresenter extends \Nette\Application\UI\Presenter {}
+abstract class BasePresenter extends eskymo\presenters\BasePresenter {}

@@ -17,9 +17,18 @@ common:
 		username: "root"
 
 	services:
+		strategies:
+			class: \prisoner\TournamentRepository
+			arguments: ['@database']
+		tournaments:
+			class: \prisoner\TournamentRepository
+			arguments: ['@database']
 		users:
-			class: UsersModel
-			
+			class: \prisoner\UserRepository
+			arguments: ['@database']
+		authenticator:
+			class: \prisoner\UserAuthenticator
+			arguments: ['@users']
 		robotLoader:
 			run: true
 

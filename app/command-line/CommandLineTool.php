@@ -40,12 +40,12 @@ abstract class CommandLineTool {
     
     abstract public function run();
     
-    protected function getArgument(Argument $argument) {
+    protected function getArgument(Argument $argument, $default = NULL) {
         if ($argument->isBool()) {
             return isset($this->arguments[$argument->getArg()]);
         }
         else {
-            return $this->arguments[$argument->getArg()];
+            return (isset($this->arguments[$argument->getArg()]) ? $this->arguments[$argument->getArg()] : $default);
         }
     }
     

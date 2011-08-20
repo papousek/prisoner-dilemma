@@ -1,0 +1,79 @@
+{extends 'layout.latte'}
+
+{block #content}
+<style>
+    #tournament-chart {
+        border: 1px solid #7A7772;
+    }
+    th.strategy-name {
+        width: 300px;
+        text-align: left;
+    }
+    td, th {
+        text-align: center; 
+        color: black;
+        padding: 5px 10px;
+    }
+    td {
+        background: black;
+    }
+    td.game-draw {
+        background: #dedede;
+    }
+    td.game-win {
+        background: #6F9C00;
+    }
+    td.game-lose {
+        background: #FF3D00;
+    }
+    td a {
+        color: black;
+    }
+</style>
+<table cellspacing="0" id="tournament-chart">
+    <tr>
+        <th>#</th>
+        <th></th>
+    {for $i=0; $i<count($strategies); $i++}
+         <th {if $i%2 == 0}class="even"{/if}>
+            <a href="{$strategies[$i]|strategyLink,$destinationDir, $contextPath}">
+                {$i+1}
+            </a>
+          </th>  
+    {/for}
+    </tr>
+    {for $i=0; $i<count($strategies); $i++}
+    <tr {if $i%2==0}class="even"{/if}>
+        <th>{$i+1}</th>
+        <th class="strategy-name">
+            <a href="{$strategies[$i]|strategyLink,$destinationDir, $contextPath}">
+            {$strategies[$i]->getName()|truncate, 30}
+            </a>
+        </th>
+        <?php $gameCounter=0 ?>
+        {foreach $games[$i] AS $game}
+            <td {if $game != null && $game->getScoreA() > $game->getScoreB()}
+                    class="game-win"
+                {else}
+                    {if $game != null && $game->getScoreA() < $game->getScoreB()}
+                        class="game-lose"
+                    {else}
+                        {if $game != null}
+                        class="game-draw"
+                        {/if}
+                    {/if}
+                {/if}
+                >
+                {if $game == null}
+                 X
+                {else}
+                <a href="game_{$i}_{$gameCounter}.html">{$game->getScoreA()}:{$game->getScoreB()}</a>
+                {/if}
+            </td>
+            <?php $gameCounter++ ?>
+        {/foreach}
+    </tr>
+    {/for}
+    
+</table>
+{/block}

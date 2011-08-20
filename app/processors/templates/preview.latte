@@ -1,0 +1,40 @@
+{extends 'layout.latte'}
+
+{block #content}
+    <style>
+        .strategy-preview {
+            width: auto;
+        }
+        .strategy-preview td {
+            width: 1.5cm;
+            line-height: 1.5cm;
+            border: 1px solid black;
+        }
+        .response-unknown {
+            background: #dedede;
+        }
+        .response-1 {
+            background: #6F9C00;
+        }
+        .response-0 {
+            background: #FF3D00;
+        }
+        .response {
+            border-left: 30px solid black !important;
+        }
+    </style>
+    <h1>{$strategy->getName()}</h1>
+    <table cellspacing="0" class="strategy-preview">
+    {foreach $strategy->getMemories() AS $memory}
+        <tr>
+            {for $i=0; $i<$strategy->getMaxMemorySize()-$memory->getSize(); $i++}
+                <td class="memory response-unknown">&nbsp;</td>
+            {/for}
+            {for $i=0; $i<$memory->getSize(); $i++}
+                <td class="memory response-{$memory->getResponse($i)->getType()}">&nbsp;</td>
+            {/for}
+            <td class="response response-{$strategy->getResponse($memory)->getType()}">&nbsp;</td>
+        </tr>
+    {/foreach}
+    </table>
+{/block}

@@ -1,0 +1,11 @@
+{extends 'layout.latte'}
+
+{block #content}
+<ol id="preview-navigation">
+    {foreach $files AS $file => $strategy}
+        <li>
+            <a href="{$file}">{$strategy->getName()}</a>
+        </li>
+    {/foreach}
+</ol>
+{/block}

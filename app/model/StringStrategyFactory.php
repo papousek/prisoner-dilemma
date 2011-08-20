@@ -10,13 +10,13 @@ class StringStrategyFactory {
         }
         $name = $splitted[0];
         $maxMemorySize = $splitted[1];
-        $strategy = $splitted[2];
+        $strategy = strtr($splitted[2], array("-" => "", "#" => "", "|" => ""));
         $position=0;
         $memories = array();
         $responses = array();
         $memoryFactory = new StringMemoryFactory();
-        for($memorySize=0; $memorySize<$maxMemorySize; $memorySize++) {
-            $numberOfPieces = pow(2, $memorySize+1);
+        for($memorySize=0; $memorySize<=$maxMemorySize; $memorySize++) {
+            $numberOfPieces = pow(2, $memorySize);
             for($i=0; $i<$numberOfPieces; $i++) {
                 $memory = substr($strategy, $position, $memorySize);
                 $response = substr($strategy, $position + $memorySize, 1);

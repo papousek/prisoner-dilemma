@@ -12,8 +12,9 @@ class Memory {
     /** @return \prisoner\Response */
     public function getResponse($index) {
         if ($index < 0 || $index >= $this->getSize()) {
-            return $this->responses[$index];
+            throw new \Nette\InvalidArgumentException("The index [$index]is out of the range [0, " . $this->getSize() . " ].");
         }
+        return $this->responses[$index];
     }
     
     public function getSize() {

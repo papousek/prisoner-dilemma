@@ -1,0 +1,82 @@
+{extends 'layout.latte'}
+
+{block #content}
+<style>
+    #results {
+        width: 100%;
+        border: 1px solid #7A7772;
+    }
+    th, td {
+        padding: 5px 10px;
+        text-align: center;
+    }
+    .good {
+        color:white;
+        background: #0c7926;
+    }
+    .good-0 {
+        background: #fff000;
+        color: black;
+    }
+    .good-1, .good-2, .good-3 {
+        background: #ddff9f;
+        color: black;
+    }
+    .good-4, .good-5, .good-6 {
+        background: #b6ef77;
+        color: black;
+    }
+    good-7, .good-8, .good-9 {
+        background: #0c7926;
+        color: black;
+    }
+    .evil {
+        background: #ff0000;
+        color: white;
+    }
+    .evil-1, .evil-2, .evil-3 {
+        background: #ffe6e6;
+        color: black;
+    }
+    .evil-4, .evil-5, .evil-6 {
+        background: #ffbfbf;
+        color: black;
+    }
+    .evil-7, .evil-8, .evil-9 {
+        background: #ff8080;
+        color: black;
+    }
+    .evil-10, .evil-11, .evil-12 {
+        background: #ff4040;
+        color: black;
+    }
+    .evil-13, .evil-14, .evil-15 {
+        background: #ff0000;
+        color: white;
+    }
+</style>
+<table id="results" cellspacing="0">
+    <tr>
+        <th>#</th>
+        <th style="text-align: left;">Název strategie</th>
+        <th>Faktor dobroty</th>
+        <th>Body</th>
+    </tr>
+    <?php $counter = 0 ?>
+    {foreach $strategies AS $strategy}
+        <tr {if $counter%2==0}class="even"{/if}>
+            <td>{$counter+1}</td>
+            <td style="text-align: left;">
+                <a href="{$strategy[0]|strategyLink,$destinationDir, $contextPath}">
+                    {$strategy[0]->getName()}
+                </a>
+            </td>
+            <td  class="{if $strategy[0]->getGoodness() >= 0}good good-{$strategy[0]->getGoodness()}{else}evil evil-{=abs($strategy[0]->getGoodness())}{/if}">
+                {$strategy[0]->getGoodness()}
+            </td>
+            <td>{$strategy[1]}</td>
+        </tr>
+        <?php $counter++?>
+    {/foreach}
+</table>
+{/block}

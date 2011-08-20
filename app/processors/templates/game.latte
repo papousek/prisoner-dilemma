@@ -1,0 +1,99 @@
+{extends 'layout.latte'}
+
+{block #content}
+    <style>
+        table.game {
+            margin-bottom: 50px;
+        }
+        th.strategy-name {
+            width: 200px;
+            text-align: left;
+            width: 300px;
+        }
+        th, td {
+            padding: 5px 10px;
+            border: 1px solid #7A7772;
+        }
+        td {
+            width: 2cm;
+            height: 2cm;
+            text-align: center;
+            color: black;
+        }
+        .response-1 {
+            background: #6F9C00;
+        }
+        .response-0 {
+            background: #FF3D00;
+        }
+        .links a, .links span {
+            margin-right: 20px;
+        }
+    </style>
+    <h2>{$strategyA->getName()} vs. {$strategyB->getName()} - {$game->getScoreA()}:{$game->getScoreB()}</h2>
+    {for $round=1; $round<=$game->getTournament()->getRounds(); $round++}
+        <h3 id="round-{$round}">{$round}. kolo</h3>
+        <p class="links">
+            <a href="#round-1">začátek</a>
+            {if $round > 1}
+                <a href="#round-{$round-1}}">předchozí</a>
+            {else}
+                <span>předchozí</span>
+            {/if}
+            {if $round < $game->getTournament()->getRounds()}
+                <a href="#round-{$round+1}">další</a>
+            {else}
+                <span>další</span>
+            {/if}
+            <a href="#round-{$game->getTournament()->getRounds()}">konec</a>
+        </p>
+        <table cellspacing="0" class="game">
+            <tr>
+                <th></th>
+                {for $i=0; $i<$game->getTournament()->getRounds(); $i++}
+                    <th>{$i+1}</th>
+                {/for}
+            <tr>
+            <tr>
+                <th class="strategy-name">
+                    <a href="{$strategyA|strategyLink,$destinationDir, $contextPath}">
+                        {$strategyA->getName()}
+                    </a>
+                </th>
+                <?php $counter=0; ?>
+                {foreach $game->getResponsesA() AS $response}
+                    {if $counter < $round }
+                        <td class="response-{$response->getType()}">
+                            {if $round - $counter <= $strategyB->getMaxMemorySize()}
+                            paměť
+                            {/if}
+                        </td>
+                    {else}
+                        <td></td>
+                    {/if}
+                    <?php $counter++ ?>
+                {/foreach}
+            <tr>
+            <tr>
+                <th class="strategy-name">
+                    <a href="{$strategyB|strategyLink,$destinationDir, $contextPath}">
+                        {$strategyB->getName()}
+                    </a>
+                </th>
+                <?php $counter=0; ?>
+                {foreach $game->getResponsesB() AS $response}
+                    {if $counter < $round }
+                        <td class="response-{$response->getType()}">
+                            {if $round - $counter <= $strategyB->getMaxMemorySize()}
+                            paměť
+                            {/if}
+                        </td>
+                    {else}
+                        <td></td>
+                    {/if}
+                    <?php $counter++ ?>
+                {/foreach}
+            <tr>
+        </table>
+    {/for}
+{/block}

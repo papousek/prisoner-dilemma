@@ -3,6 +3,6 @@ namespace prisoner;
 
 interface Processor {
  
-    function process(array $strategies, File $destinationDir, $silent = true);
+    function process(array $strategies, \eskymo\io\File  $destinationDir, $silent = true);
     
 }

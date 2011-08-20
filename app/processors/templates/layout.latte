@@ -1,0 +1,74 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <meta name="author" content="Jan Papoušek" />
+        <title>Vězňovo dilema</title>
+        <style>
+            body {
+                font: 16px/1.5 sans-serif;
+                color: #333;
+                padding: 10px 50px;
+            }
+            h1 {
+                color: #7A7772;
+            }
+            a {
+                color: #A60000;
+            }
+            a:hover {
+                color: white;
+                background: #A60000;
+                text-decoration: none;
+            }            
+            ul#navigation {
+                background: #7A7772;
+                padding: 0;
+            }
+            ul#navigation li {
+                list-style: none;
+                padding: 0;
+            }
+            ul#navigation li a {
+                color: white;
+                text-decoration: none;
+                font-size: 130%;
+                text-transform: uppercase;
+                font-weight: bold;
+                display: block;
+                padding: 10px 50px;
+                width: 100px;
+                border: 1px solid #7A7772;
+                float: left;
+            }
+            ul#navigation li a:hover {
+                background: white;
+                color: #7A7772;
+            }
+            .clear {
+                clear: both;
+                visibility: hidden;
+            }
+            .even {
+                background: #dfedef;
+            }
+        </style>
+    </head>
+    <body>
+        <ul id="navigation">
+            <li>
+                <a href="{$contextPath}/index.html">Výsledky</a>
+            </li>
+            <li>
+                <a href="{$contextPath}/tournament/index.html">Turnaj</a>
+            </li>
+            <li>
+                <a href="{$contextPath}/preview/index.html">Náhled</a>
+            </li>
+            <div class="clear"></div>
+        </ul>
+        
+        {block #content}{/block}
+    </body>
+</html>
+
